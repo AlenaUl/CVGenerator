@@ -13,17 +13,17 @@ public class Employee {
 	private String Firstname;
 	private String Lastname;
 	private String Date_Of_Birth;
-	private String Phone_Number;
+	private String PhoneNumber;
 	private String Email;
 	
 	public Employee(){}
 	
-	public Employee(int ID, String Firstname, String Lastname, String Date_Of_Birth, String phone_number, String Email){
+	public Employee(int ID, String Firstname, String Lastname, String Date_Of_Birth, String PhoneNumber, String Email){
 		this.ID = ID;
 		this.Firstname = Firstname;
 		this.Lastname = Lastname;
 		this.Date_Of_Birth = Date_Of_Birth;
-		this.Phone_Number = phone_number;
+		this.PhoneNumber = PhoneNumber;
 		this.Email = Email;
 	}
 	
@@ -64,12 +64,12 @@ public class Employee {
 		this.Date_Of_Birth = Date_Of_Birth;
 	}
 	
-	public String getPhone_Number() {
-		return Phone_Number;
+	public String getPhoneNumber() {
+		return PhoneNumber;
 	}
 	
-	public void setPhone_Number(String Phone_Number) {
-		this.Phone_Number = Phone_Number;
+	public void setPhoneNumber(String PhoneNumber) {
+		this.PhoneNumber = PhoneNumber;
 	}
 	
 	public String getEmail() {
