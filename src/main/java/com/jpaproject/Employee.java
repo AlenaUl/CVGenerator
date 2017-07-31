@@ -13,7 +13,7 @@ public class Employee {
 	private String Firstname;
 	private String Lastname;
 	private String Date_Of_Birth;
-	private String PhoneNumber;
+	private String phonenumber;
 	private String Email;
 	
 	public Employee(){}
@@ -23,7 +23,7 @@ public class Employee {
 		this.Firstname = Firstname;
 		this.Lastname = Lastname;
 		this.Date_Of_Birth = Date_Of_Birth;
-		this.PhoneNumber = PhoneNumber;
+		this.phonenumber = PhoneNumber;
 		this.Email = Email;
 	}
 	
@@ -65,11 +65,11 @@ public class Employee {
 	}
 	
 	public String getPhoneNumber() {
-		return PhoneNumber;
+		return phonenumber;
 	}
 	
 	public void setPhoneNumber(String PhoneNumber) {
-		this.PhoneNumber = PhoneNumber;
+		this.phonenumber = PhoneNumber;
 	}
 	
 	public String getEmail() {

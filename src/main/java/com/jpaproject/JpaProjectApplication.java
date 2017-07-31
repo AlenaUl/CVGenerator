@@ -21,7 +21,7 @@ public class JpaProjectApplication implements CommandLineRunner {
 	public void run(String... arg0) throws Exception {
 	
 		Employee[] employeeArray = {
-				new Employee(2, "Alena", "Ulrich", "1991-01-19", "01726000000", "ulrichal20@gmail.com")
+				new Employee(3, "Alena", "Ulrich", "1991-01-19", "01726000000", "ulrichal20@gmail.com")
 		};
 		
 		for (Employee employee : employeeArray){
