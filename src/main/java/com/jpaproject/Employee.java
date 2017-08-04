@@ -1,7 +1,13 @@
 package com.jpaproject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -9,16 +15,17 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class Employee {
 
 	@Id
-	private int ID;
+	private Integer ID;
 	private String Firstname;
 	private String Lastname;
 	private String Date_Of_Birth;
 	private String phonenumber;
 	private String Email;
+	private List<Project> Projects = new ArrayList<Project>();
 	
 	public Employee(){}
 	
-	public Employee(int ID, String Firstname, String Lastname, String Date_Of_Birth, String PhoneNumber, String Email){
+	public Employee(Integer ID, String Firstname, String Lastname, String Date_Of_Birth, String PhoneNumber, String Email){
 		this.ID = ID;
 		this.Firstname = Firstname;
 		this.Lastname = Lastname;
@@ -32,11 +39,12 @@ public class Employee {
 		return ToStringBuilder.reflectionToString(this);
 	}
 	
-	public int getID() {
+	public Integer getID() {
 		return ID;
 	}
 	
-	public void setID(int ID) {
+	public void setID(Integer ID) {
+		if(ID == 0) throw new RuntimeException();
 		this.ID = ID;
 	}
 	
@@ -79,4 +87,24 @@ public class Employee {
 	public void setEmail(String Email) {
 		this.Email = Email;
 	}
+
+	@ManyToMany
+	@JoinTable(name="Project",
+				joinColumns={@JoinColumn(name="ID", referencedColumnName="ID")},
+				inverseJoinColumns={@JoinColumn(name="Pr_ID", referencedColumnName="Pr_ID")})
+	public List<Project> getProjects() {
+		return Projects;
+	}
+
+	/*public void setProjects(List<Project> Projects) {
+		this.Projects = Projects;
+	}*/
+	
+	/*public Project Search_Project(String customer){
+		for(Project project : Projects){
+            if (project.getCustomer() == customer)
+                return project;
+        }
+        return null;
+	}*/
 }

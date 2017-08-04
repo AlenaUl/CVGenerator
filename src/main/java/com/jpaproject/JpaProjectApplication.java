@@ -12,6 +12,8 @@ public class JpaProjectApplication implements CommandLineRunner {
 	
 	@Autowired
 	EmployeeRepository employeeRepository;
+	ProjectRepository projectRepository;
+	TechnologyRepository technologyRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(JpaProjectApplication.class, args);
