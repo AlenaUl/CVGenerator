@@ -7,8 +7,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class ProjectTechnology {
 	@Id
 	private Integer protech_id;
-//	private Integer pr_id;
-	//private Integer t_id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pr_id")
