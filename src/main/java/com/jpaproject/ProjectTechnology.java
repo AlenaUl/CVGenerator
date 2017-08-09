@@ -7,16 +7,22 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class ProjectTechnology {
 	@Id
 	private Integer protech_id;
-	private Integer pr_id;
-	private Integer t_id;
+//	private Integer pr_id;
+	//private Integer t_id;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pr_id")
 	private Project project;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "t_id")
 	private Technology technology;
 	
 	public ProjectTechnology(){}
 	
 	public ProjectTechnology(Integer pr_id, Integer t_id){
-		this.setPr_id(pr_id);
-		this.setT_id(t_id);
+	//	this.setPr_id(pr_id);
+//		this.setT_id(t_id);
 	}
 
 	@Override
@@ -34,7 +40,7 @@ public class ProjectTechnology {
 		this.protech_id = protech_id;
 	}
 	
-	public Integer getPr_id() {
+/*	public Integer getPr_id() {
 		return pr_id;
 	}
 
@@ -49,9 +55,8 @@ public class ProjectTechnology {
 	public void setT_id(Integer t_id) {
 		this.t_id = t_id;
 	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pr_id")
+*/
+	
 	public Project getProject() {
 		return project;
 	}
@@ -60,8 +65,7 @@ public class ProjectTechnology {
 		this.project = project;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "t_id")
+	
 	public Technology getTechnology() {
 		return technology;
 	}

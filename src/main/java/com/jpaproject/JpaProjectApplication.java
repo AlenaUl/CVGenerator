@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootApplication
 public class JpaProjectApplication implements CommandLineRunner {
@@ -25,20 +26,24 @@ public class JpaProjectApplication implements CommandLineRunner {
 	}
 
 	@Override
+	@Transactional
 	public void run(String... arg0) throws Exception {
 	
-/*		Employee[] employeeArray = {
-				new Employee(4, "Alena", "Ulrich", "1991-01-19", "01726000000", "ulrichal20@gmail.com")
+	/*	Employee[] employeeArray = {
+				new Employee(2, "Alena", "Ulrich", "1991-01-19", "01726000000", "ulrichal20@gmail.com")
 		};
 		
 		for (Employee employee : employeeArray){
 			employeeRepository.save(employee);
-		}*/
+		}
+*/
 		
 		List<Employee> listOfEmployee = employeeRepository.findAll();
 		
 		for (Employee emp : listOfEmployee) {
 			System.out.println("Employee: " + emp.toString());
 		}	
+		
+		
 	}
 }

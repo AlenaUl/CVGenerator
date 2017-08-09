@@ -16,7 +16,10 @@ public class Project {
 	private String start_date;
 	private String end_date;
 	
+	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
 	private Set<Job> jobs = new HashSet<Job>();
+	
+	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
 	private Set<ProjectTechnology> protech = new HashSet<ProjectTechnology>();
 
 	public Project(){}
@@ -76,7 +79,7 @@ public class Project {
 		this.end_date = end_date;
 	}
 
-	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+	
 	public Set<Job> getJobs() {
 		return jobs;
 	}
@@ -89,7 +92,7 @@ public class Project {
 		this.jobs.remove(jobs);
 	}
 	
-	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+	
 	public Set<ProjectTechnology> getProtech() {
 		return protech;
 	}

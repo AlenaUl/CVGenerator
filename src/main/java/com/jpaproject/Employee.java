@@ -16,6 +16,7 @@ public class Employee {
 	private String phonenumber;
 	private String email;
 	
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
 	private Set<Job> jobs = new HashSet<Job>();
 	
 	public Employee(){}
@@ -83,7 +84,7 @@ public class Employee {
 		this.email = email;
 	}
 
-	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+	
 	public Set<Job> getJobs() {
 		return jobs;
 	}

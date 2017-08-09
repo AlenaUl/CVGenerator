@@ -13,6 +13,7 @@ public class Technology {
 	private Integer t_id;
 	private String name;
 	
+	@OneToMany(mappedBy = "technology", fetch = FetchType.LAZY)
 	private Set<ProjectTechnology> protech = new HashSet<ProjectTechnology>();
 	
 	public Technology(){}
@@ -44,7 +45,7 @@ public class Technology {
 		this.name = name;
 	}
 
-	@OneToMany(mappedBy = "technology", fetch = FetchType.LAZY)
+	
 	public Set<ProjectTechnology> getProtech() {
 		return protech;
 	}

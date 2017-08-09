@@ -10,6 +10,8 @@ public class Part {
 	@Id
 	private Integer p_id;
 	private String name;
+	
+	@OneToMany(mappedBy = "part", fetch = FetchType.LAZY)
 	private Set<Job> jobs = new HashSet<Job>();
 	
 	public Part(){}
@@ -40,7 +42,7 @@ public class Part {
 		this.name = name;
 	}
 
-	@OneToMany(mappedBy = "part", fetch = FetchType.LAZY)
+	
 	public Set<Job> getJobs() {
 		return jobs;
 	}
