@@ -9,12 +9,12 @@ public class EmployeeTest {
 	@Test
 	public final void testGetID() {
 		Integer testValue = 123456;
-		Project p = new Project();
-		p.setPr_ID(testValue);
+		Employee emp = new Employee();
+		emp.setID(testValue);
 		
-		Integer ID = p.getPr_ID();
+		Integer emp_id = emp.getID();
 		
-		assertEquals(ID, testValue);
+		assertEquals(emp_id, testValue);
 	}
 	
 	@Test(expected = RuntimeException.class)

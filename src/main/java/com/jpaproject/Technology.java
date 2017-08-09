@@ -1,10 +1,7 @@
 package com.jpaproject;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.*;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -13,15 +10,16 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class Technology {
 	
 	@Id
-	private Integer T_ID;
-	private String Name;
-	private List<Project> Projects = new ArrayList<Project>();
+	private Integer t_id;
+	private String name;
+	
+	private Set<ProjectTechnology> protech = new HashSet<ProjectTechnology>();
 	
 	public Technology(){}
 	
-	public Technology(Integer T_ID, String Name){
-		this.T_ID = T_ID;
-		this.Name = Name;
+	public Technology(Integer t_id, String name){
+		this.t_id = t_id;
+		this.name = name;
 	}
 	
 	@Override
@@ -29,33 +27,35 @@ public class Technology {
 		return ToStringBuilder.reflectionToString(this);
 	}
 	
-	public Integer getT_ID() {
-		return T_ID;
+	@Column(name="t_id")
+	public Integer getT_id() {
+		return t_id;
 	}
 
-	public void setT_ID(Integer T_ID) {
-		this.T_ID = T_ID;
+	public void setT_id(Integer t_id) {
+		this.t_id = t_id;
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
-	public void setName(String Name) {
-		this.Name = Name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@ManyToMany
-	@JoinTable(name="Project",
-				joinColumns={@JoinColumn(name="T_ID", referencedColumnName="T_ID")},
-				inverseJoinColumns={@JoinColumn(name="Pr_ID", referencedColumnName="Pr_ID")})
-	public List<Project> getProjects() {
-		return Projects;
+	@OneToMany(mappedBy = "technology", fetch = FetchType.LAZY)
+	public Set<ProjectTechnology> getProtech() {
+		return protech;
 	}
 
-	/*public void setProjects(List<Project> Projects) {
-		this.Projects = Projects;
-	}*/
+	public void add(ProjectTechnology protech) {
+		this.protech.add(protech);
+	}
+	
+	public void remove(ProjectTechnology protech) {
+		this.protech.remove(protech);
+	}
 	
 	/*public Project Search_Project(String customer){
 		for(Project project : Projects){

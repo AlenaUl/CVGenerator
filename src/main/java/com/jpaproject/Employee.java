@@ -1,13 +1,7 @@
 package com.jpaproject;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import java.util.*;
+import javax.persistence.*;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -15,23 +9,24 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class Employee {
 
 	@Id
-	private Integer ID;
-	private String Firstname;
-	private String Lastname;
-	private String Date_Of_Birth;
+	private Integer emp_id;
+	private String firstname;
+	private String lastname;
+	private String date_of_birth;
 	private String phonenumber;
-	private String Email;
-	private List<Project> Projects = new ArrayList<Project>();
+	private String email;
+	
+	private Set<Job> jobs = new HashSet<Job>();
 	
 	public Employee(){}
 	
-	public Employee(Integer ID, String Firstname, String Lastname, String Date_Of_Birth, String PhoneNumber, String Email){
-		this.ID = ID;
-		this.Firstname = Firstname;
-		this.Lastname = Lastname;
-		this.Date_Of_Birth = Date_Of_Birth;
-		this.phonenumber = PhoneNumber;
-		this.Email = Email;
+	public Employee(Integer emp_id, String firstname, String lastname, String date_of_birth, String phonenumber, String email){
+		this.emp_id = emp_id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.date_of_birth = date_of_birth;
+		this.phonenumber = phonenumber;
+		this.email = email;
 	}
 	
 	@Override
@@ -40,65 +35,66 @@ public class Employee {
 	}
 	
 	public Integer getID() {
-		return ID;
+		return emp_id;
 	}
 	
-	public void setID(Integer ID) {
-		if(ID == 0) throw new RuntimeException();
-		this.ID = ID;
+	public void setID(Integer emp_id) {
+		if(emp_id == 0) throw new RuntimeException();
+		this.emp_id = emp_id;
 	}
 	
 	public String getFirstname() {
-		return Firstname;
+		return firstname;
 	}
 	
-	public void setFirstname(String Firstname) {
-		this.Firstname = Firstname;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 	
 	public String getLastname() {
-		return Lastname;
+		return lastname;
 	}
 	
-	public void setLastname(String Lastname) {
-		this.Lastname = Lastname;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 	
-	public String getDate_Of_Birth() {
-		return Date_Of_Birth;
+	public String getDate_of_birth() {
+		return date_of_birth;
 	}
  
-	public void setDate_Of_Birth(String Date_Of_Birth) {
-		this.Date_Of_Birth = Date_Of_Birth;
+	public void setDate_of_birth(String date_of_birth) {
+		this.date_of_birth = date_of_birth;
 	}
 	
-	public String getPhoneNumber() {
+	public String getPhonenumber() {
 		return phonenumber;
 	}
 	
-	public void setPhoneNumber(String PhoneNumber) {
-		this.phonenumber = PhoneNumber;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 	
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	
-	public void setEmail(String Email) {
-		this.Email = Email;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	@ManyToMany
-	@JoinTable(name="Project",
-				joinColumns={@JoinColumn(name="ID", referencedColumnName="ID")},
-				inverseJoinColumns={@JoinColumn(name="Pr_ID", referencedColumnName="Pr_ID")})
-	public List<Project> getProjects() {
-		return Projects;
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+	public Set<Job> getJobs() {
+		return jobs;
 	}
 
-	/*public void setProjects(List<Project> Projects) {
-		this.Projects = Projects;
-	}*/
+	public void add(Job jobs) {
+		this.jobs.add(jobs);
+	}
+	
+	public void remove(Job jobs) {
+		this.jobs.remove(jobs);
+	}
 	
 	/*public Project Search_Project(String customer){
 		for(Project project : Projects){

@@ -1,10 +1,6 @@
 package com.jpaproject;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.util.*;
 import javax.persistence.*;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -14,22 +10,23 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class Project {
 	
 	@Id
-	private Integer Pr_ID;
-	private String Customer;
-	private String Topic;
-	private String Start_Date;
-	private String End_Date;
-	private List<Employee> Employees = new ArrayList<Employee>();;
-	private List<Technology> Technologies = new ArrayList<Technology>();;
+	private Integer pr_id;
+	private String customer;
+	private String topic;
+	private String start_date;
+	private String end_date;
 	
+	private Set<Job> jobs = new HashSet<Job>();
+	private Set<ProjectTechnology> protech = new HashSet<ProjectTechnology>();
+
 	public Project(){}
 	
-	public Project(Integer Pr_ID, String Customer, String Topic, String Start_Date, String End_Date){
-		this.Pr_ID = Pr_ID;
-		this.Customer = Customer;
-		this.Topic = Topic;
-		this.Start_Date = Start_Date;
-		this.End_Date = End_Date;
+	public Project(Integer pr_id, String customer, String topic, String start_date, String end_date){
+		this.pr_id = pr_id;
+		this.customer = customer;
+		this.topic = topic;
+		this.start_date = start_date;
+		this.end_date = end_date;
 	}
 	
 	@Override
@@ -37,71 +34,76 @@ public class Project {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
-	public Integer getPr_ID() {
-		return Pr_ID;
+	@Column(name="pr_id")
+	public Integer getPrID() {
+		return pr_id;
 	}
 
-	public void setPr_ID(Integer Pr_ID) {
-		if(Pr_ID == 0) throw new RuntimeException("NICHT GUT");
-		this.Pr_ID = Pr_ID;
+	public void setPrID(Integer pr_id) {
+		if(pr_id == 0) throw new RuntimeException("NICHT GUT");
+		this.pr_id = pr_id;
 	}
 
 	public String getCustomer() {
-		return Customer;
+		return customer;
 	}
 
-	public void setCustomer(String Customer) {
-		this.Customer = Customer;
+	public void setCustomer(String customer) {
+		this.customer = customer;
 	}
 
 	public String getTopic() {
-		return Topic;
+		return topic;
 	}
 
-	public void setTopic(String Topic) {
-		this.Topic = Topic;
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 
 	public String getStart_Date() {
-		return Start_Date;
+		return start_date;
 	}
 
-	public void setStart_Date(String Start_Date) {
-		this.Start_Date = Start_Date;
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
 	}
 
-	public String getEnd_Date() {
-		return End_Date;
+	public String getEnd_date() {
+		return end_date;
 	}
 
-	public void setEnd_Date(String End_Date) {
-		this.End_Date = End_Date;
+	public void setEnd_Date(String end_date) {
+		this.end_date = end_date;
 	}
 
-	@ManyToMany(mappedBy="Projects")
-	public List<Employee> getEmployees() {
-		return Employees;
+	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+	public Set<Job> getJobs() {
+		return jobs;
 	}
 
-	/*public void setEmployees(List<Employee> Employees) {
-		this.Employees = Employees;
-	}*/
+	public void add(Job jobs) {
+		this.jobs.add(jobs);
+	}
 	
-	@ManyToMany(mappedBy="Projects")
-	public List<Technology> getTechnologies() {
-		return Technologies;
+	public void remove(Job jobs) {
+		this.jobs.remove(jobs);
+	}
+	
+	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+	public Set<ProjectTechnology> getProtech() {
+		return protech;
 	}
 
-	/*public void setTechnologies(List<Technology> Technologies) {
-		this.Technologys = Technologies;
-	}*/
+	public void setProtech(Set<ProjectTechnology> protech) {
+		this.protech = protech;
+	}
 	
-	public Employee Search_Employee(String lastname){
-		for(Employee employee : Employees){
-            if (employee.getLastname() == lastname)
-                return employee;
-        }
-        return null;
+	public void add(ProjectTechnology protech) {
+		this.protech.add(protech);
+	}
+	
+	public void remove(ProjectTechnology protech) {
+		this.protech.remove(protech);
 	}
 	
 	/*public Technology Search_Technology(String name){
