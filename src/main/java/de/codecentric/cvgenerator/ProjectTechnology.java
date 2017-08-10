@@ -1,4 +1,4 @@
-package com.jpaproject;
+package de.codecentric.cvgenerator;
 import javax.persistence.*;
 
 import org.apache.commons.lang.builder.ToStringBuilder;

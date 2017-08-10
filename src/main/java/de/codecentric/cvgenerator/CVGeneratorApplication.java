@@ -1,4 +1,4 @@
-package com.jpaproject;
+package de.codecentric.cvgenerator;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootApplication
-public class JpaProjectApplication implements CommandLineRunner {
+public class CVGeneratorApplication implements CommandLineRunner {
 	
 	@Autowired
 	EmployeeRepository employeeRepository;
@@ -19,7 +19,7 @@ public class JpaProjectApplication implements CommandLineRunner {
 	PartRepository partRepository;
 
 	public static void main(String[] args) {
-		SpringApplication.run(JpaProjectApplication.class, args);
+		SpringApplication.run(CVGeneratorApplication.class, args);
 		
 	}
 

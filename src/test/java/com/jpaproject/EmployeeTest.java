@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
+import de.codecentric.cvgenerator.Employee;
+
 public class EmployeeTest {
 	
 	@Test
