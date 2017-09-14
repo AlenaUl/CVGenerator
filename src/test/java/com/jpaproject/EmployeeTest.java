@@ -2,11 +2,33 @@ package com.jpaproject;
 
 import static org.junit.Assert.*;
 
-import org.junit.*;
+import java.util.Collection;
+
+import org.junit.Test;
 
 import de.codecentric.cvgenerator.Employee;
+import de.codecentric.cvgenerator.Job;
+import de.codecentric.cvgenerator.Part;
+import de.codecentric.cvgenerator.Project;
 
 public class EmployeeTest {
+	
+	@Test
+	public void testProjectsWithPart() {
+		Employee employee = new Employee();
+		Part part = new Part();
+		Project project = new Project();
+		Job job = new Job();
+		job.setEmployee(employee);
+		job.setPart(part);
+		job.setProject(project);
+		employee.add(job);
+		
+		Collection<Project> projects = employee.getProjectsWithPart(part);
+		
+		assertTrue(projects.contains(project));
+		
+	}
 	
 	@Test
 	public final void testGetID() {

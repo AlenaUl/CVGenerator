@@ -8,7 +8,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @Entity
 public class Part {
 	@Id
-	private Integer p_id;
+	@GeneratedValue
+	private Integer id;
 	private String name;
 	
 	@OneToMany(mappedBy = "part", fetch = FetchType.LAZY)
@@ -16,8 +17,8 @@ public class Part {
 	
 	public Part(){}
 	
-	public Part(Integer p_id, String name){
-		this.p_id = p_id;
+	public Part(Integer id, String name){
+		this.id = id;
 		this.name = name;
 	}
 	
@@ -26,12 +27,12 @@ public class Part {
 		return ToStringBuilder.reflectionToString(this);
 	}
 	
-	public Integer getP_id() {
-		return p_id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setP_id(Integer p_id) {
-		this.p_id = p_id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {

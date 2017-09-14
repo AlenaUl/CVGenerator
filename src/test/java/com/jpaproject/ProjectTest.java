@@ -12,11 +12,11 @@ public class ProjectTest {
 	public final void testGetID() {
 		Integer testValue = 123456;
 		Project p = new Project();
-		p.setPrID(testValue);
+		p.setID(testValue);
 		
-		Integer pr_id = p.getPrID();
+		Integer id = p.getID();
 		
-		assertEquals(pr_id, testValue);
+		assertEquals(id, testValue);
 	}
 	
 	@Test(expected = RuntimeException.class)
@@ -24,7 +24,7 @@ public class ProjectTest {
 		
 		
 		Project p = new Project();
-		p.setPrID(0);
+		p.setID(0);
 		
 	}
 

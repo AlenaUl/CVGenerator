@@ -10,7 +10,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class Project {
 	
 	@Id
-	private Integer pr_id;
+	@GeneratedValue
+	private Integer id;
 	private String customer;
 	private String topic;
 	private String start_date;
@@ -24,8 +25,8 @@ public class Project {
 
 	public Project(){}
 	
-	public Project(Integer pr_id, String customer, String topic, String start_date, String end_date){
-		this.pr_id = pr_id;
+	public Project(Integer id, String customer, String topic, String start_date, String end_date){
+		this.id = id;
 		this.customer = customer;
 		this.topic = topic;
 		this.start_date = start_date;
@@ -37,14 +38,13 @@ public class Project {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
-	@Column(name="pr_id")
-	public Integer getPrID() {
-		return pr_id;
+	public Integer getID() {
+		return id;
 	}
 
-	public void setPrID(Integer pr_id) {
-		if(pr_id == 0) throw new RuntimeException("NICHT GUT");
-		this.pr_id = pr_id;
+	public void setID(Integer id) {
+		if(id == 0) throw new RuntimeException("NICHT GUT");
+		this.id = id;
 	}
 
 	public String getCustomer() {

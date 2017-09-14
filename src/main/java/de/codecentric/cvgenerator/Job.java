@@ -8,19 +8,20 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class Job {
 
 	@Id
-	private Integer job_id;
+	@GeneratedValue
+	private Integer id;
 
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "emp_id")
+	@JoinColumn(name = "employee_id")
 	private Employee employee;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pr_id")
+	@JoinColumn(name = "project_id")
 	private Project project;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "p_id")
+	@JoinColumn(name = "part_id")
 	private Part part;
 
 	public Job(){}

@@ -10,7 +10,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 public class Technology {
 	
 	@Id
-	private Integer t_id;
+	@GeneratedValue
+	private Integer id;
 	private String name;
 	
 	@OneToMany(mappedBy = "technology", fetch = FetchType.LAZY)
@@ -18,8 +19,8 @@ public class Technology {
 	
 	public Technology(){}
 	
-	public Technology(Integer t_id, String name){
-		this.t_id = t_id;
+	public Technology(Integer id, String name){
+		this.id = id;
 		this.name = name;
 	}
 	
@@ -28,13 +29,12 @@ public class Technology {
 		return ToStringBuilder.reflectionToString(this);
 	}
 	
-	@Column(name="t_id")
-	public Integer getT_id() {
-		return t_id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setT_id(Integer t_id) {
-		this.t_id = t_id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {

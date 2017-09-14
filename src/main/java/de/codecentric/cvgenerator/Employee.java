@@ -3,13 +3,15 @@ package de.codecentric.cvgenerator;
 import java.util.*;
 import javax.persistence.*;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Entity
 public class Employee {
 
 	@Id
-	private Integer emp_id;
+	@GeneratedValue
+	private Integer id;
 	private String firstname;
 	private String lastname;
 	private String date_of_birth;
@@ -21,8 +23,8 @@ public class Employee {
 	
 	public Employee(){}
 	
-	public Employee(Integer emp_id, String firstname, String lastname, String date_of_birth, String phonenumber, String email){
-		this.emp_id = emp_id;
+	public Employee(Integer id, String firstname, String lastname, String date_of_birth, String phonenumber, String email){
+		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.date_of_birth = date_of_birth;
@@ -36,12 +38,12 @@ public class Employee {
 	}
 	
 	public Integer getID() {
-		return emp_id;
+		return id;
 	}
 	
-	public void setID(Integer emp_id) {
-		if(emp_id == 0) throw new RuntimeException();
-		this.emp_id = emp_id;
+	public void setID(Integer id) {
+		if(id == 0) throw new RuntimeException();
+		this.id = id;
 	}
 	
 	public String getFirstname() {
@@ -83,7 +85,21 @@ public class Employee {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
+	/**
+	 * Get all projects of this employee with given role.
+	 * @param part
+	 * @return
+	 */
+	public Collection<Project> getProjectsWithPart(Part part) {
+		Collection<Project> projects = new LinkedList<Project>();
+		for (Job job : jobs) {
+			if (job.getPart().equals(part)) {
+				projects.add(job.getProject());
+			}
+		}
+		return projects;
+	}
 	
 	public Set<Job> getJobs() {
 		return jobs;

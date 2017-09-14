@@ -27,7 +27,7 @@ public class CVGeneratorApplication implements CommandLineRunner {
 	@Transactional
 	public void run(String... arg0) throws Exception {
 	
-	/*	Employee[] employeeArray = {
+/*	Employee[] employeeArray = {
 				new Employee(2, "Alena", "Ulrich", "1991-01-19", "01726000000", "ulrichal20@gmail.com")
 		};
 		
