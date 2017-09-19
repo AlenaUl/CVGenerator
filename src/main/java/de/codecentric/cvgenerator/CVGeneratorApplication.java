@@ -1,8 +1,11 @@
 package de.codecentric.cvgenerator;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -43,8 +46,23 @@ public class CVGeneratorApplication implements CommandLineRunner {
 		CVGenerator generator = new CVGenerator();
 		//for (Employee emp : listOfEmployee) {
 			CV cv = generator.createCV(emp);
-			OutputStream out = new FileOutputStream("/home/alena/test.tex");		
+			ByteArrayOutputStream out = new ByteArrayOutputStream();		
 			cv.render(out);
+			
+			ZipOutputStream zip = new ZipOutputStream(new FileOutputStream("/home/alena/files.zip"));
+			
+			zip.putNextEntry(new ZipEntry("projects.tex"));
+	        zip.write(out.toByteArray());
+	        
+	        ByteArrayOutputStream out2 = new ByteArrayOutputStream();		
+			cv.renderTitlePage(out2);
+	        
+	        zip.putNextEntry(new ZipEntry("titlepage.tex"));
+	        zip.write(out2.toByteArray());
+	        
+	     //   zip.flush();
+	        zip.close();
+			
 			//System.out.println("Employee: " + emp.toString());
 		//}	
 		

@@ -28,7 +28,7 @@ public class CV {
 		Velocity.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
 		
 		VelocityContext context = new VelocityContext();
-		context.put("name", employee.getFirstname());
+		context.put("name", employee.getLastname() + " " + employee.getFirstname());
 		
 		Template template = Velocity.getTemplate("titlepage.tex");
 		
