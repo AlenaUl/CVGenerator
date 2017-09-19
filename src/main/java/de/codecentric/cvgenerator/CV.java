@@ -1,15 +1,16 @@
 package de.codecentric.cvgenerator;
 
 
-import de.nixosoft.jlr.*;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
+import org.apache.velocity.runtime.RuntimeConstants;
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 public class CV {
 	
@@ -23,20 +24,40 @@ public class CV {
 	 * Render this CV as PDF file.
 	 * @param out
 	 */
+	public void renderTitlePage(OutputStream out) throws IOException {
+		Velocity.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+		Velocity.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+		
+		VelocityContext context = new VelocityContext();
+		context.put("name", employee.getFirstname());
+		
+		Template template = Velocity.getTemplate("titlepage.tex");
+		
+		Writer writer = new OutputStreamWriter(out);
+		
+		template.merge(context, writer);
+		
+		writer.flush();
+	}
+	
+	/**
+	 * Render this CV as PDF file.
+	 * @param out
+	 */
 	public void render(OutputStream out) throws IOException {
-		try (PDDocument doc = new PDDocument()) {
-			PDPage page = new PDPage();
-			doc.addPage(page);
-			PDFont font = PDType1Font.HELVETICA;
-			try (PDPageContentStream contents = new PDPageContentStream(doc, page)) {
-				contents.beginText();
-				contents.setFont(font, 12);
-				contents.newLineAtOffset(100, 700);
-				contents.showText(employee.getFirstname());
-				contents.endText();
-			}
-			doc.save(out);
-		}
+		Velocity.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+		Velocity.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+		
+		VelocityContext context = new VelocityContext();
+		context.put("employee", employee);
+				
+		Template template = Velocity.getTemplate("projects.vm");
+		
+		Writer writer = new OutputStreamWriter(out);
+		
+		template.merge(context, writer);
+		
+		writer.flush();
 	}
 
 }

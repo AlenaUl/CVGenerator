@@ -1,5 +1,7 @@
 package de.codecentric.cvgenerator;
 
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +38,15 @@ public class CVGeneratorApplication implements CommandLineRunner {
 		}
 */
 		
-		List<Employee> listOfEmployee = employeeRepository.findAll();
-		
-		for (Employee emp : listOfEmployee) {
-			System.out.println("Employee: " + emp.toString());
-		}	
+		//List<Employee> listOfEmployee = employeeRepository.findAll();
+		Employee emp = employeeRepository.getOne(1);
+		CVGenerator generator = new CVGenerator();
+		//for (Employee emp : listOfEmployee) {
+			CV cv = generator.createCV(emp);
+			OutputStream out = new FileOutputStream("/home/alena/test.tex");		
+			cv.render(out);
+			//System.out.println("Employee: " + emp.toString());
+		//}	
 		
 		
 	}
