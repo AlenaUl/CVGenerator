@@ -1,4 +1,4 @@
-package com.jpaproject;
+package de.codecentric.cvgenerator;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

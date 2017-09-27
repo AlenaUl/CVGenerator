@@ -1,4 +1,4 @@
-package com.jpaproject;
+package de.codecentric.cvgenerator;
 
 import static org.junit.Assert.*;
 
