@@ -3,7 +3,6 @@ package de.codecentric.cvgenerator;
 import java.util.*;
 import javax.persistence.*;
 
-import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Entity
@@ -20,6 +19,18 @@ public class Employee {
 	
 	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
 	private Set<Job> jobs = new HashSet<Job>();
+	
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+	private Set<EmployeeSkills> employeeskills = new HashSet<EmployeeSkills>();
+	
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+	private Set<EmployeeCertification> employeecertification = new HashSet<EmployeeCertification>();
+	
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+	private Set<EmployeeCommunity> employeecommunity = new HashSet<EmployeeCommunity>();
+	
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+	private Set<EmployeePublication> employeepublication = new HashSet<EmployeePublication>();
 	
 	public Employee(){}
 	
@@ -113,6 +124,53 @@ public class Employee {
 		this.jobs.remove(jobs);
 	}
 	
+	public Set<EmployeeSkills> getEmployeeSkills() {
+		return employeeskills;
+	}
+
+	public void add(EmployeeSkills employeeskills) {
+		this.employeeskills.add(employeeskills);
+	}
+	
+	public void remove(EmployeeSkills employeeskills) {
+		this.employeeskills.remove(employeeskills);
+	}
+	
+	public Set<EmployeeCertification> getEmployeeCertification() {
+		return employeecertification;
+	}
+
+	public void add(EmployeeCertification employeecertification) {
+		this.employeecertification.add(employeecertification);
+	}
+	
+	public void remove(EmployeeCertification employeecertification) {
+		this.employeecertification.remove(employeecertification);
+	}
+	
+	public Set<EmployeeCommunity> getEmployeeCommunity() {
+		return employeecommunity;
+	}
+
+	public void add(EmployeeCommunity employeecommunity) {
+		this.employeecommunity.add(employeecommunity);
+	}
+	
+	public void remove(EmployeeCommunity employeecommunity) {
+		this.employeecommunity.remove(employeecommunity);
+	}
+	
+	public Set<EmployeePublication> getEmployeePublication() {
+		return employeepublication;
+	}
+
+	public void add(EmployeePublication employeepublication) {
+		this.employeepublication.add(employeepublication);
+	}
+	
+	public void remove(EmployeePublication employeepublication) {
+		this.employeepublication.remove(employeepublication);
+	}
 	/*public Project Search_Project(String customer){
 		for(Project project : Projects){
             if (project.getCustomer() == customer)
