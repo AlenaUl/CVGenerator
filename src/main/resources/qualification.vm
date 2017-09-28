@@ -1,0 +1,10 @@
+\section*{Ausbildung/Beruflicher Werdegang}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}p{6cm}p{10cm}}
+#foreach( $empQualification in $employee.employeeQualification)
+#set( $qualification = $empQualification.qualification )
+${qualification.startDateFormatted}-$qualification.endDateFormatted & $qualification.place.replace('&', '\&') \\
+\nopagebreak & $qualification.profil \\
+#end
+\end{longtable}
+\renewcommand{\arraystretch}{2}

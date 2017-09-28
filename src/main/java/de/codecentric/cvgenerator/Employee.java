@@ -32,6 +32,9 @@ public class Employee {
 	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
 	private Set<EmployeePublication> employeepublication = new HashSet<EmployeePublication>();
 	
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+	private Set<EmployeeQualification> employeequalification = new HashSet<EmployeeQualification>();
+
 	public Employee(){}
 	
 	public Employee(Integer id, String firstname, String lastname, String date_of_birth, String phonenumber, String email){
@@ -124,6 +127,24 @@ public class Employee {
 		this.jobs.remove(jobs);
 	}
 	
+	public Set<Category> getSkillCategories() {
+		Set<Category> result = new HashSet<Category>();
+		for (EmployeeSkills skill : getEmployeeSkills()) {
+			result.addAll(skill.getSkills().getCategories());
+		}
+		return result;
+	}
+	
+	public Set<Skills> getSkillsForCategory(Category category) {
+		Set<Skills> result = new HashSet<Skills>();
+		for (EmployeeSkills skill : getEmployeeSkills()) {
+			if (skill.getSkills().getCategories().contains(category)) {
+				result.add(skill.getSkills());
+			}
+		}
+		return result;
+	}
+	
 	public Set<EmployeeSkills> getEmployeeSkills() {
 		return employeeskills;
 	}
@@ -170,6 +191,18 @@ public class Employee {
 	
 	public void remove(EmployeePublication employeepublication) {
 		this.employeepublication.remove(employeepublication);
+	}
+	
+	public Set<EmployeeQualification> getEmployeeQualification() {
+		return employeequalification;
+	}
+
+	public void add(EmployeeQualification employeequalification) {
+		this.employeequalification.add(employeequalification);
+	}
+	
+	public void remove(EmployeeQualification employeecertification) {
+		this.employeequalification.remove(employeequalification);
 	}
 	/*public Project Search_Project(String customer){
 		for(Project project : Projects){

@@ -1,0 +1,6 @@
+\section*{Zur Person}
+\begin{longtable}{@{}p{6cm}p{10cm}}
+
+Mobil			& $employee.phonenumber \\
+Email			& $employee.email \\
+\end{longtable}

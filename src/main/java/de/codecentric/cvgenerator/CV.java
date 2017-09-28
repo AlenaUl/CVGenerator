@@ -39,11 +39,7 @@ public class CV {
 		writer.flush();
 	}
 	
-	/**
-	 * Render this CV as PDF file.
-	 * @param out
-	 */
-	public void render(OutputStream out) throws IOException {
+	public void renderProjects(OutputStream out) throws IOException {
 		Velocity.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
 		Velocity.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
 		
@@ -59,4 +55,83 @@ public class CV {
 		writer.flush();
 	}
 
+	public void renderSkills(OutputStream out) throws IOException {
+		Velocity.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+		Velocity.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+		
+		VelocityContext context = new VelocityContext();
+		context.put("employee", employee);
+				
+		Template template = Velocity.getTemplate("skills.vm");
+		
+		Writer writer = new OutputStreamWriter(out);
+		
+		template.merge(context, writer);
+		
+		writer.flush();
+	}
+	
+	public void renderPersonal(OutputStream out) throws IOException {
+		Velocity.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+		Velocity.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+		
+		VelocityContext context = new VelocityContext();
+		context.put("employee", employee);
+		
+		Template template = Velocity.getTemplate("personal.vm");
+		
+		Writer writer = new OutputStreamWriter(out);
+		
+		template.merge(context, writer);
+		
+		writer.flush();
+	}
+
+	public void renderQualification(OutputStream out) throws IOException {
+		Velocity.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+		Velocity.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+		
+		VelocityContext context = new VelocityContext();
+		context.put("employee", employee);
+		
+		Template template = Velocity.getTemplate("qualification.vm");
+		
+		Writer writer = new OutputStreamWriter(out);
+		
+		template.merge(context, writer);
+		
+		writer.flush();
+	}
+	
+	public void renderCommunity(OutputStream out) throws IOException {
+		Velocity.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+		Velocity.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+		
+		VelocityContext context = new VelocityContext();
+		context.put("employee", employee);
+		
+		Template template = Velocity.getTemplate("community.vm");
+		
+		Writer writer = new OutputStreamWriter(out);
+		
+		template.merge(context, writer);
+		
+		writer.flush();
+	}
+	
+	public void renderCertification(OutputStream out) throws IOException {
+		Velocity.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+		Velocity.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+		
+		VelocityContext context = new VelocityContext();
+		context.put("employee", employee);
+		
+		Template template = Velocity.getTemplate("certification.vm");
+		
+		Writer writer = new OutputStreamWriter(out);
+		
+		template.merge(context, writer);
+		
+		writer.flush();
+	}
 }

@@ -34,6 +34,6 @@ public class CVGeneratorTest {
 		
 		CV cv = generator.createCV(employee);
 		OutputStream out = new FileOutputStream("/home/alena/test.tex");		
-		cv.render(out);
+		cv.renderProjects(out);
 	}
 }

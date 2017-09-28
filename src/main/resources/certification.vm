@@ -1,0 +1,7 @@
+\section*{Zertifikate}
+\begin{longtable}[label=,leftmargin=0cm,itemsep=10pt]
+#foreach( $empcertification in $employee.employeecertification)
+#set( $certification = $empcertification.certification )
+$certification.name
+#end
+\end{longtable}

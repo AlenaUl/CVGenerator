@@ -46,6 +46,14 @@ public class Skills {
 		this.name = name;
 	}
 	
+	public Set<Category> getCategories() {
+		Set<Category> result = new HashSet<Category>();
+		for (SkillsCategory sc : getSkillsCategory()) {
+			result.add(sc.getCategory());
+		}
+		return result;
+	}
+	
 	public Set<SkillsCategory> getSkillsCategory() {
 		return skillscategory;
 	}

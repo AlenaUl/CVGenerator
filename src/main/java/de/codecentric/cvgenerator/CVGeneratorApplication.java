@@ -2,8 +2,6 @@ package de.codecentric.cvgenerator;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -22,7 +20,20 @@ public class CVGeneratorApplication implements CommandLineRunner {
 	TechnologyRepository technologyRepository;
 	JobRepository jobRepository;
 	PartRepository partRepository;
-
+	CategoryRepository categoryRepository;
+	CertificationRepository certificationRepository;
+	CommunityRepository communityRepository;
+	EmployeeCertificationRepository employeecertificationRepository;
+	EmployeeCommunityRepository employeecommunityRepository;
+	EmployeePublicationRepository employeepublicationRepository;
+	EmployeeQualificationRepository employeequalificationRepository;
+	EmployeeSkillsRepository employeeskillsRepository;
+	ProjectTechnologyRepository projecttechnologyRepository;
+	PublicationRepository publicationRepository;
+	QualificationRepository qualificationRepository;
+	SkillsRepository skillsRepository;
+	SkillsCategoryRepository skillscategoryRepository;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(CVGeneratorApplication.class, args);
 		
@@ -47,7 +58,7 @@ public class CVGeneratorApplication implements CommandLineRunner {
 		//for (Employee emp : listOfEmployee) {
 			CV cv = generator.createCV(emp);
 			ByteArrayOutputStream out = new ByteArrayOutputStream();		
-			cv.render(out);
+			cv.renderProjects(out);
 			
 			ZipOutputStream zip = new ZipOutputStream(new FileOutputStream("/home/alena/files.zip"));
 			
@@ -60,7 +71,37 @@ public class CVGeneratorApplication implements CommandLineRunner {
 	        zip.putNextEntry(new ZipEntry("titlepage.tex"));
 	        zip.write(out2.toByteArray());
 	        
-	     //   zip.flush();
+	        ByteArrayOutputStream out3 = new ByteArrayOutputStream();		
+			cv.renderSkills(out3);
+			
+	        zip.putNextEntry(new ZipEntry("skills.tex"));
+	        zip.write(out3.toByteArray());
+	        
+	        ByteArrayOutputStream out4 = new ByteArrayOutputStream();		
+	        cv.renderPersonal(out4);
+			
+	        zip.putNextEntry(new ZipEntry("personal.tex"));
+	        zip.write(out4.toByteArray());
+	        
+	        ByteArrayOutputStream out5 = new ByteArrayOutputStream();		
+	        cv.renderQualification(out5);
+			
+	        zip.putNextEntry(new ZipEntry("qualification.tex"));
+	        zip.write(out5.toByteArray());
+	        
+	        ByteArrayOutputStream out6 = new ByteArrayOutputStream();		
+	        cv.renderCommunity(out6);
+			
+	        zip.putNextEntry(new ZipEntry("community.tex"));
+	        zip.write(out6.toByteArray());
+	        
+	        ByteArrayOutputStream out7 = new ByteArrayOutputStream();		
+	        cv.renderCertification(out7);
+			
+	        zip.putNextEntry(new ZipEntry("certification.tex"));
+	        zip.write(out7.toByteArray());
+	      
+	     // zip.flush();
 	        zip.close();
 			
 			//System.out.println("Employee: " + emp.toString());

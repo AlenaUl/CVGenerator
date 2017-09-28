@@ -1,0 +1,9 @@
+\section*{Fachkenntnisse}
+\begin{longtable}{@{}p{6cm}p{10cm}}
+
+#foreach( $category in $employee.skillCategories )
+
+$category.name.replace('&', '\&') & #foreach( $skill in $employee.getSkillsForCategory($category) )$skill.name.replace('&', '\&')#if($foreach.hasNext), #end #end \\ 
+
+#end
+\end{longtable}

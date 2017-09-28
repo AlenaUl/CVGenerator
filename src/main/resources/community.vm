@@ -1,0 +1,15 @@
+\section*{Konferenzbeiträge}
+\begin{longtable}[label=,leftmargin=0cm,itemsep=10pt]
+#foreach( $empcommunity in $employee.employeecommunity)
+#set( $community = $empcommunity.community )
+$community.year & $community.theme\\ 
+	       & $community.conference, & $community.place
+#end
+\end{longtable}
+\section*{Fachartikel}
+\begin{longtable}[label=,leftmargin=0cm,itemsep=10pt]
+#foreach( $empPublication in $employee.employeePublication)
+#set( $publication = $empPublication.publication )
+$publication.title., & in: $publication.jornal, Nr. $publication.volume, S. $publication.startPage – $publication.endPage
+#end
+\end{longtable}
