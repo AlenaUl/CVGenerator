@@ -1,5 +1,8 @@
 package de.codecentric.cvgenerator;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.persistence.*;
 
@@ -8,6 +11,9 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @Entity
 public class Employee {
 
+	@Transient
+	private DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
@@ -35,6 +41,9 @@ public class Employee {
 	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
 	private Set<EmployeeQualification> employeequalification = new HashSet<EmployeeQualification>();
 
+	@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+	private Set<EmployeeLanguage> employeelanguage = new HashSet<EmployeeLanguage>();
+	
 	public Employee(){}
 	
 	public Employee(Integer id, String firstname, String lastname, String date_of_birth, String phonenumber, String email){
@@ -76,8 +85,11 @@ public class Employee {
 		this.lastname = lastname;
 	}
 	
-	public String getDate_of_birth() {
-		return date_of_birth;
+	
+	public String getDate_of_birthFormatted() throws ParseException {
+		Date date = format.parse(date_of_birth);
+		SimpleDateFormat dt = new SimpleDateFormat("dd.MM.yyyy");
+        return dt.format(date);
 	}
  
 	public void setDate_of_birth(String date_of_birth) {
@@ -113,6 +125,10 @@ public class Employee {
 			}
 		}
 		return projects;
+	}
+	
+	public String getFullName() {
+		return firstname + " " + lastname;
 	}
 	
 	public Set<Job> getJobs() {
@@ -204,6 +220,19 @@ public class Employee {
 	public void remove(EmployeeQualification employeecertification) {
 		this.employeequalification.remove(employeequalification);
 	}
+	
+	public Set<EmployeeLanguage> getEmployeeLanguage() {
+		return employeelanguage;
+	}
+
+	public void add(EmployeeLanguage employeelanguage) {
+		this.employeelanguage.add(employeelanguage);
+	}
+	
+	public void remove(EmployeeLanguage employeelanguage) {
+		this.employeelanguage.remove(employeelanguage);
+	}
+	
 	/*public Project Search_Project(String customer){
 		for(Project project : Projects){
             if (project.getCustomer() == customer)

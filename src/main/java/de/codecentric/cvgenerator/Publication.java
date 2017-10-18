@@ -11,7 +11,7 @@ public class Publication {
 	@GeneratedValue
 	private Integer id;
 	private String title;
-	private String jornal;
+	private String journal;
 	private Integer volume;
 	private Integer start_page;
 	private Integer end_page;
@@ -21,10 +21,10 @@ public class Publication {
 	
 	public Publication(){}
 	
-	public Publication(Integer id, String title, String jornal, Integer volume, Integer start_page, Integer end_page){
+	public Publication(Integer id, String title, String journal, Integer volume, Integer start_page, Integer end_page){
 		this.id = id;
 		this.title = title;
-		this.jornal = jornal;
+		this.journal = journal;
 		this.volume = volume;
 		this.start_page = start_page;
 		this.end_page = end_page;
@@ -50,12 +50,12 @@ public class Publication {
 		this.title = title;
 	}
 
-	public String getJornal() {
-		return jornal;
+	public String getJournal() {
+		return journal;
 	}
 
-	public void setJornal(String jornal) {
-		this.jornal = jornal;
+	public void setJournal(String jornal) {
+		this.journal = jornal;
 	}
 
 	public Integer getVolume() {
@@ -66,19 +66,19 @@ public class Publication {
 		this.volume = volume;
 	}
 
-	public Integer getStart_page() {
+	public Integer getStartPage() {
 		return start_page;
 	}
 
-	public void setStart_page(Integer start_page) {
+	public void setStartPage(Integer start_page) {
 		this.start_page = start_page;
 	}
 
-	public Integer getEnd_page() {
+	public Integer getEndPage() {
 		return end_page;
 	}
 
-	public void setEnd_page(Integer end_page) {
+	public void setEndPage(Integer end_page) {
 		this.end_page = end_page;
 	}
 	

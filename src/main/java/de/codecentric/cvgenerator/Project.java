@@ -92,6 +92,12 @@ public class Project {
 		SimpleDateFormat dt1 = new SimpleDateFormat("MM/yyyy");
         return dt1.format(date);
 	}
+	
+	public String getEndDateFormattedReversed() throws ParseException {
+		Date date = format.parse(end_date);
+		SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-MM-dd");
+        return dt1.format(date);
+	}
 
 	public void setEndDate(String end_date) {
 		this.end_date = end_date;
@@ -125,13 +131,5 @@ public class Project {
 	
 	public void remove(ProjectTechnology protech) {
 		this.protech.remove(protech);
-	}
-	
-	/*public Technology Search_Technology(String name){
-		for(Technology technology : Technologies){
-            if (technology.getName() == name)
-                return technology;
-        }
-        return null;
-	}*/
+	}	
 }

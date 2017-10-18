@@ -1,4 +1,4 @@
-\newcommand{\cccvname}{$name}
+\newcommand{\cccvname}{$employee.fullName}
 \newcommand{\cccvjobtitle}{IT Consultant}
 
 \NoBgThispage

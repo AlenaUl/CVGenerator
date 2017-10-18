@@ -1,6 +1,7 @@
 \section*{Zur Person}
 \begin{longtable}{@{}p{6cm}p{10cm}}
-
-Mobil			& $employee.phonenumber \\
-Email			& $employee.email \\
+\textbf{Geburtsdatum}	& $employee.date_of_birthFormatted \\
+\textbf{Sprachen}		& #foreach($empLanguage in $employee.employeeLanguage)$empLanguage.language.name#if($foreach.hasNext),#end #end \\
+\textbf{Mobil}			& $employee.phonenumber \\
+\textbf{Email}			& $employee.email \\
 \end{longtable}

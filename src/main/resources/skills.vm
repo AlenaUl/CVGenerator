@@ -3,7 +3,7 @@
 
 #foreach( $category in $employee.skillCategories )
 
-$category.name.replace('&', '\&') & #foreach( $skill in $employee.getSkillsForCategory($category) )$skill.name.replace('&', '\&')#if($foreach.hasNext), #end #end \\ 
+\textbf{$category.name.replace('&', '\&')} & #foreach( $skill in $employee.getSkillsForCategory($category) )$skill.name.replace('&', '\&')#if($foreach.hasNext), #end #end \\ 
 
 #end
 \end{longtable}

@@ -70,6 +70,13 @@ public class Qualification {
 		SimpleDateFormat dt1 = new SimpleDateFormat("MM/yyyy");
         return dt1.format(date);
 	}
+	
+	public String getRange() throws ParseException {
+		if (end_date == null)
+			return "Seit " + getStartDateFormatted();
+		else
+			return getStartDateFormatted() + " - " + getEndDateFormatted();
+	}
 
 	public void setStartDate(String start_date) {
 		this.start_date = start_date;

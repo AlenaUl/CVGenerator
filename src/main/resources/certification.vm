@@ -1,7 +1,7 @@
 \section*{Zertifikate}
-\begin{longtable}[label=,leftmargin=0cm,itemsep=10pt]
-#foreach( $empcertification in $employee.employeecertification)
+\begin{enumerate}[label=,leftmargin=0cm,itemsep=10pt]
+#foreach( $empcertification in $employee.employeeCertification)
 #set( $certification = $empcertification.certification )
-$certification.name
+\item $certification.name
 #end
-\end{longtable}
+\end{enumerate}

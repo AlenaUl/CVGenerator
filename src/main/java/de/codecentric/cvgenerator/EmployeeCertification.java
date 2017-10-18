@@ -41,7 +41,7 @@ public class EmployeeCertification {
 		return certification;
 	}
 
-	public void setSkills(Certification certification) {
+	public void setCertification(Certification certification) {
 		this.certification = certification;
 	}
 

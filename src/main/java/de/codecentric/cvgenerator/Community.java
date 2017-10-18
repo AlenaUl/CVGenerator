@@ -13,14 +13,14 @@ public class Community {
 	private String theme;
 	private String conference;
 	private String place;
-	private String year;
+	private int year;
 	
 	@OneToMany(mappedBy = "community", fetch = FetchType.LAZY)
 	private Set<EmployeeCommunity> employeecommunity = new HashSet<EmployeeCommunity>();
 	
 	public Community(){}
 	
-	public Community(Integer id, String theme, String conference, String place, String year){
+	public Community(Integer id, String theme, String conference, String place, int year){
 		this.id = id;
 		this.theme = theme;
 		this.conference = conference;
@@ -65,11 +65,11 @@ public class Community {
 		this.place = place;
 	}
 
-	public String getYear() {
+	public int getYear() {
 		return year;
 	}
 
-	public void setYear(String year) {
+	public void setYear(int year) {
 		this.year = year;
 	}
 	

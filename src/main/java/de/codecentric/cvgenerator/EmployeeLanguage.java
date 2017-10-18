@@ -5,7 +5,7 @@ import javax.persistence.*;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Entity
-public class Job {
+public class EmployeeLanguage {
 
 	@Id
 	@GeneratedValue
@@ -17,18 +17,11 @@ public class Job {
 	private Employee employee;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "project_id")
-	private Project project;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "part_id")
-	private Part part;
+	@JoinColumn(name = "language_id")
+	private Language language;
 
-	public Job(){}
+	public EmployeeLanguage(){}
 	
-	public int getId() {
-		return id;
-	}
 	
 	@Override
 	public String toString(){
@@ -43,23 +36,13 @@ public class Job {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-
 	
-	public Project getProject() {
-		return project;
+	public Language getLanguage() {
+		return language;
 	}
 
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
-	
-	public Part getPart() {
-		return part;
-	}
-
-	public void setPart(Part part) {
-		this.part = part;
+	public void setLanguage(Language language) {
+		this.language = language;
 	}
 
 }

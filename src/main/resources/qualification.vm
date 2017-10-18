@@ -3,7 +3,7 @@
 \begin{longtable}{@{}p{6cm}p{10cm}}
 #foreach( $empQualification in $employee.employeeQualification)
 #set( $qualification = $empQualification.qualification )
-${qualification.startDateFormatted}-$qualification.endDateFormatted & $qualification.place.replace('&', '\&') \\
+\textbf{$qualification.range} & $qualification.place.replace('&', '\&') \\
 \nopagebreak & $qualification.profil \\
 #end
 \end{longtable}
