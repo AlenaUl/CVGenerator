@@ -74,6 +74,7 @@ public class Skills {
 		this.employeeskills.add(employeeskills);
 	}
 	
+	@SuppressWarnings("unlikely-arg-type")
 	public void remove(EmployeeSkills skillscategory) {
 		this.employeeskills.remove(employeeskills);
 	}

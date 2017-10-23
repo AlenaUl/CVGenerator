@@ -1,6 +1,8 @@
 package de.codecentric.cvgenerator;
 
 import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -9,6 +11,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.Transactional;
+import org.apache.commons.io.IOUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.*;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ByteArrayBody;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 @SpringBootApplication
 public class CVGeneratorApplication implements CommandLineRunner {
@@ -41,24 +51,16 @@ public class CVGeneratorApplication implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... arg0) throws Exception {
-	
-/*	Employee[] employeeArray = {
-				new Employee(2, "Alena", "Ulrich", "1991-01-19", "01726000000", "ulrichal20@gmail.com")
-		};
-		
-		for (Employee employee : employeeArray){
-			employeeRepository.save(employee);
-		}
-*/
-		
-		//List<Employee> listOfEmployee = employeeRepository.findAll();
 		Employee emp = employeeRepository.getOne(1);
+		
 		CVGenerator generator = new CVGenerator();
-		//for (Employee emp : listOfEmployee) {
-			
+
 		CV cv = generator.createCV(emp);
-			
-		ZipOutputStream zip = new ZipOutputStream(new FileOutputStream("/home/alena/files.zip"));
+		
+		ByteArrayOutputStream templates = new ByteArrayOutputStream();
+		//OutputStream templates = new FileOutputStream("/home/alena/files.zip");	
+		
+		ZipOutputStream zip = new ZipOutputStream(templates);
 			
 		zip.putNextEntry(new ZipEntry("titlepage.tex"));	
 		cv.renderTitlePage(zip);	
@@ -82,7 +84,22 @@ public class CVGeneratorApplication implements CommandLineRunner {
         cv.renderCertification(zip);
       
         zip.close();
-		
+	
+        MultipartEntity entity = new MultipartEntity();
+        entity.addPart("templates", new ByteArrayBody(templates.toByteArray(), "application/zip", "tepmlates.zip"));
+
+        HttpPost request = new HttpPost("http://localhost:8080/upload");
+        request.setEntity(entity);
+
+        HttpClient client = new DefaultHttpClient();
+        HttpResponse response = client.execute(request);
+        
+        System.out.println(response);
+
+        OutputStream outputStream = new FileOutputStream("/home/alena/output.pdf");
+        IOUtils.copy(response.getEntity().getContent(), outputStream);
+        outputStream.close();
+        
 		//System.out.println("Employee: " + emp.toString());
 	//}	
 		
