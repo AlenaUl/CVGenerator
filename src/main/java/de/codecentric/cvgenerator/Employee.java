@@ -3,12 +3,27 @@ package de.codecentric.cvgenerator;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import javax.persistence.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Locale;
+import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 @Entity
+@JsonIgnoreProperties({"jobs", "employeeSkills", "employeeLanguage", "employeeCertification", "employeeQualification", "employeeCommunity", "employeePublication", "skillCategories"})
 public class Employee {
 
 	@Transient

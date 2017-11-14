@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  title: CVGenerator
+  description: Creating a CV with Latex-Templates
+  version: beta
+servers:
+  - url: 'http://localhost/'
+    description: CVGenerator App
+paths:
+  /employees:
+    post:
+      summary: Create new employee
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstname:
+                  type: string
+                lastname:
+                  type: string
+                dateOfBirth:
+                  type: string
+                phonenumber:
+                  type: integer
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Succesful operation
+          content:
+            application/json
+        '400':
+          description: Bad request
+    get:
+      summary: Get all employees
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json

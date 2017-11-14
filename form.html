@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Titel der Webseite</title>
+    <!-- weitere Kopfinformationen -->
+    <!-- Kommentare werden im Browser nicht angezeigt. -->
+  </head>
+  <body>
+    <p>Inhalt der Webseite</p>
+    <form method="POST" enctype="multipart/form-data" action="/employees">
+    	First name:<br>
+		<input type="text" name="firstname"><br>
+		Last name:<br>
+		<input type="text" name="lastname"><br>
+		Birthdate:<br>
+  		<input type="date" name="dateOfBirth"><br>
+  		Phonenumber:<br>
+  		<input type="number" name="phonenumber"><br>
+  		E-mail:<br>
+  		<input type="email" name="email"><br>
+    	<input type="submit" value="OK" />
+    </form>
+    <form method="GET" enctype="application/json" action="/employees">
+    	<input type="number" name="id" />
+    	<input type="submit" value="OK" />
+    </form>
+  </body>
+</html>
