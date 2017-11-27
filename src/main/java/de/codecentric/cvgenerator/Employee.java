@@ -248,12 +248,4 @@ public class Employee {
 	public void remove(EmployeeLanguage employeelanguage) {
 		this.employeelanguage.remove(employeelanguage);
 	}
-	
-	/*public Project Search_Project(String customer){
-		for(Project project : Projects){
-            if (project.getCustomer() == customer)
-                return project;
-        }
-        return null;
-	}*/
 }

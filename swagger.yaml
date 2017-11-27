@@ -41,3 +41,31 @@ paths:
           description: Successful operation
           content:
             application/json
+            
+  /employees/{id}:
+    get:
+      summary: Get employee by id
+      description: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstname:
+                  type: string
+                lastname:
+                  type: string
+                dateOfBirth:
+                  type: string
+                phonenumber:
+                  type: integer
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Succesful operation
+          content:
+            application/json
+        '400':
+          description: Bad request
