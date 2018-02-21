@@ -1,49 +1,30 @@
-package de.codecentric.cvgenerator.app;
+package de.codecentric.cvgenerator;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.transaction.annotation.Transactional;
-
-import de.codecentric.cvgenerator.CV;
-import de.codecentric.cvgenerator.CVGenerator;
-import de.codecentric.cvgenerator.CategoryRepository;
-import de.codecentric.cvgenerator.CertificationRepository;
-import de.codecentric.cvgenerator.CommunityRepository;
-import de.codecentric.cvgenerator.Employee;
-import de.codecentric.cvgenerator.EmployeeCertificationRepository;
-import de.codecentric.cvgenerator.EmployeeCommunityRepository;
-import de.codecentric.cvgenerator.EmployeePublicationRepository;
-import de.codecentric.cvgenerator.EmployeeQualificationRepository;
-import de.codecentric.cvgenerator.EmployeeRepository;
-import de.codecentric.cvgenerator.EmployeeSkillsRepository;
-import de.codecentric.cvgenerator.JobRepository;
-import de.codecentric.cvgenerator.PartRepository;
-import de.codecentric.cvgenerator.ProjectRepository;
-import de.codecentric.cvgenerator.ProjectTechnologyRepository;
-import de.codecentric.cvgenerator.PublicationRepository;
-import de.codecentric.cvgenerator.QualificationRepository;
-import de.codecentric.cvgenerator.SkillsCategoryRepository;
-import de.codecentric.cvgenerator.SkillsRepository;
-import de.codecentric.cvgenerator.TechnologyRepository;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.*;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.Transactional;
 
-//@SpringBootApplication
+@SpringBootApplication
+@Configuration
+@EnableJpaRepositories
+@SuppressWarnings("deprecation")
 public class CVGeneratorApplication implements CommandLineRunner {
 	
 	@Autowired
@@ -71,7 +52,6 @@ public class CVGeneratorApplication implements CommandLineRunner {
 		
 	}
 
-	@Override
 	@Transactional
 	public void run(String... arg0) throws Exception {
 		Employee emp = employeeRepository.getOne(1);
@@ -114,7 +94,8 @@ public class CVGeneratorApplication implements CommandLineRunner {
         HttpPost request = new HttpPost("http://localhost:8080/upload");
         request.setEntity(entity);
 
-        HttpClient client = new DefaultHttpClient();
+        @SuppressWarnings("resource")
+		HttpClient client = new DefaultHttpClient();
         HttpResponse response = client.execute(request);
         
         System.out.println(response);

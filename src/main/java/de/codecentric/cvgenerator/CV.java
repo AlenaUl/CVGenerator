@@ -62,7 +62,7 @@ public class CV {
 		context.put("sorter", new SortTool());
 		context.put("projectComparator", new Comparator<Project>() {
 
-			@Override
+			
 			public int compare(Project left, Project right) {
 				return left.getStartDate().compareTo(right.getStartDate());
 			}

@@ -83,5 +83,142 @@ insert into project_technology (project_id, technology_id) values(1,24),(1,25),(
 
 insert into job (employee_id, project_id, part_id) values(1, 1, 1),(1, 1, 2),(1, 2, 1), (1, 3, 1),(1, 4, 2),(1, 4, 3),
                 (1, 5, 1),(1, 5, 2),(1, 5, 4),(1, 6, 1),(1, 6, 5),(1, 7, 1),(1, 7, 6),(1, 8, 1),(1, 8, 2),
-                (1, 8, 4),(1, 8, 6),(1, 8, 7);   
+                (1, 8, 4),(1, 8, 6),(1, 8, 7); 
+                
+create table category(
+        id int not null auto_increment,
+        name varchar(60) default null,
+        primary key(id)
+);
+
+create table category(
+        id int not null auto_increment,
+        name varchar(60) default null,
+        primary key(id)
+);
+
+create table skills_category(
+        id int not null auto_increment,
+        skills_id int not null,
+        category_id int not null,
+        constraint pk_skica primary key(id),
+        constraint fk_skills foreign key(skills_id)
+                             references skills(id),
+        constraint fk_category foreign key(category_id)
+                             references category(id),
+        constraint uq_skica unique (skills_id, category_id)
+);
+
+create table qualification(
+        id int not null auto_increment,
+        place varchar(100) default null,
+        profil varchar(200) default null,
+        start_date date default null,
+        end_date date default null,
+        primary key(id)
+);
+
+create table employee_qualification(
+        id int not null auto_increment,
+        employee_id int not null,
+        qualification_id int not null,
+        constraint pk_emqu primary key(id),
+        constraint fk_emplo foreign key(employee_id)
+                             references employee(id),
+        constraint fk_qualification foreign key(qualification_id)
+                             references qualification(id),
+        constraint uq_emqu unique (employee_id, qualification_id)
+);
+
+create table employee_skills(
+        id int not null auto_increment,
+        employee_id int not null,
+        skills_id int not null,
+        constraint pk_emsk primary key(id),
+        constraint fk_empl foreign key(employee_id)
+                             references employee(id),
+        constraint fk_ski foreign key(skills_id)
+                             references skills(id),
+        constraint uq_emsk unique (employee_id, skills_id)
+);
+
+create table certification(
+        id int not null auto_increment,
+        name varchar(60) default null,
+        primary key(id)
+);
+
+create table employee_certification(
+        id int not null auto_increment,
+        employee_id int not null,
+        certification_id int not null,
+        constraint pk_emce primary key(id),
+        constraint fk_emp foreign key(employee_id)
+                             references employee(id),
+        constraint fk_certification foreign key(certification_id)
+                             references certification(id),
+        constraint uq_emce unique (employee_id, certification_id)
+);
+
+create table community(
+        id int not null auto_increment,
+        theme varchar(200) default null,
+        conference varchar(200) default null,
+        place varchar(200) default null,
+        year varchar(200) default null,
+        primary key(id)
+);
+
+create table employee_community(
+        id int not null auto_increment,
+        employee_id int not null,
+        community_id int not null,
+        constraint pk_emco primary key(id),
+        constraint fk_em foreign key(employee_id)
+                             references employee(id),
+        constraint fk_community foreign key(community_id)
+                             references community(id),
+        constraint uq_emco unique(employee_id, community_id)
+);
+
+create table publication(
+        id int not null auto_increment,
+        title varchar(200) default null,
+        journal varchar(100) default null,
+        volume int default null,
+        start_page int default null,
+        end_dpage int default null,
+        primary key(id)
+);
+
+create table employee_publication(
+        id int not null auto_increment,
+        employee_id int not null,
+        publication_id int not null,
+        constraint pk_empub primary key(id),
+        constraint fk_e foreign key(employee_id)
+                             references employee(id),
+        constraint fk_publication foreign key(publication_id)
+                             references publication(id),
+        constraint uq_empub unique(employee_id, publication_id)
+);
+
+create table language(
+        id int not null auto_increment,
+        name varchar(60) default null,
+        level int default null,
+        primary key(id)
+);
+
+create table employee_language(
+        id int not null auto_increment,
+        employee_id int not null,
+        language_id int not null,
+        constraint pk_emlang primary key(id),
+        constraint fk_empe foreign key(employee_id)
+                             references employee(id),
+        constraint fk_language foreign key(language_id)
+                             references language(id),
+        constraint uq_emlang unique(employee_id, language_id)
+);
 */
